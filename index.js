@@ -2,6 +2,7 @@ import { parseQuestions, generateResult } from "./quizbot.js";
 import express from "express";
 import chalk from "chalk";
 import dotenv from "dotenv";
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -11,6 +12,8 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 let rateLimit = true;
+
+app.use(cors());
 
 app.use(function (req, res, next) {
   if (res.headersSent) {
