@@ -50,9 +50,13 @@ app.get("/questions", async (req, res) => {
   }
 
   let prompt = `generate an IPL themed quiz with 5 questions, the format should be as follows:\nQ: who won the IPL 2013?\n- Mumbai Indians\n- Delhi Capitals\n- Rajasthan Royals\n-  Chennai Super Kings\n[ans: 1]\nThe difficulty should be ${difficulty}.`;
-  let result = await generateResult(prompt);
-
-  const questions = parseQuestions(result.data.choices[0].message.content);
+  try {
+    let result = await generateResult(prompt);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Something went wrong\n", error.toString());
+    return;
+  }
 
   res.send(questions);
 });
