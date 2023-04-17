@@ -11,7 +11,7 @@ if (process.env.NODE_ENV !== "production") {
   dotenv.config();
 }
 
-let rateLimit = true;
+let rateLimit = false;
 
 app.use(cors());
 
